@@ -1,0 +1,139 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    if (window.tailwind) {
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        display: ['Fraunces', 'serif']
+                    },
+                    colors: {
+                        market: {
+                            cream: "#f4f8ff",
+                            parchment: "#e8f0ff",
+                            pine: "#1f3fb7",
+                            moss: "#2448d8",
+                            mint: "#d7e6ff",
+                            gold: "#f5a000",
+                            ember: "#ff4d4f",
+                            ink: "#171d2d",
+                            line: "#d7e4ff",
+                            shell: "#fbfdff"
+                        }
+                    },
+                    boxShadow: {
+                        panel: "0 20px 60px rgba(30, 64, 208, 0.08)",
+                        float: "0 14px 40px rgba(30, 64, 208, 0.12)"
+                    },
+                    borderRadius: {
+                        shell: "2rem"
+                    },
+                    backgroundImage: {
+                        "market-grid": "radial-gradient(circle at 1px 1px, rgba(31,63,183,0.08) 1px, transparent 0)",
+                        "market-glow": "radial-gradient(circle at top right, rgba(245,160,0,0.18), transparent 32%), radial-gradient(circle at bottom left, rgba(36,72,216,0.12), transparent 30%)"
+                    }
+                }
+            }
+        };
+    }
+</script>
+<style>
+    ::selection {
+        background: rgba(36, 72, 216, 0.22);
+    }
+
+    body {
+        font-family: Manrope, sans-serif;
+        background-image:
+            radial-gradient(circle at top, rgba(255,255,255,0.92), transparent 30rem),
+            linear-gradient(180deg, #f7fbff 0%, #eff5ff 100%);
+        color: #171d2d;
+    }
+
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(18px);
+    }
+
+    .app-shell {
+        min-height: 100vh;
+    }
+
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        gap: 0.95rem;
+        border-radius: 1.35rem;
+        padding: 0.95rem 1rem;
+        color: #262d42;
+        transition: all 180ms ease;
+    }
+
+    .sidebar-link:hover {
+        background: #eef4ff;
+        color: #1f3fb7;
+    }
+
+    .sidebar-link.active {
+        background: #d8e7ff;
+        color: #1f3fb7;
+        box-shadow: inset 0 0 0 1px rgba(31, 63, 183, 0.06);
+    }
+
+    .sidebar-icon {
+        flex-shrink: 0;
+        width: 1.45rem;
+        height: 1.45rem;
+    }
+
+    .page-card {
+        border-radius: 2rem;
+        border: 1px solid #d7e4ff;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 20px 60px rgba(30, 64, 208, 0.08);
+    }
+
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    .safe-wrap {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .metric-card {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .metric-card::after {
+        content: "";
+        position: absolute;
+        inset: auto -10% -45% auto;
+        width: 8rem;
+        height: 8rem;
+        border-radius: 9999px;
+        background: rgba(255,255,255,0.08);
+    }
+
+    .blue-scroll::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .blue-scroll::-webkit-scrollbar-thumb {
+        background: rgba(31, 63, 183, 0.3);
+        border-radius: 9999px;
+    }
+
+    .blue-scroll::-webkit-scrollbar-track {
+        background: rgba(215, 228, 255, 0.55);
+    }
+</style>
