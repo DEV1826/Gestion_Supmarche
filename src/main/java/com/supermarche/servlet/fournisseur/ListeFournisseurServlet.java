@@ -5,7 +5,6 @@ import com.supermarche.dao.ProduitDAO;
 import com.supermarche.util.FlashUtil;
 import com.supermarche.util.PaginationUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/fournisseurs")
 public class ListeFournisseurServlet extends HttpServlet {
 
     private final FournisseurDAO fournisseurDAO = new FournisseurDAO();
@@ -45,7 +43,7 @@ public class ListeFournisseurServlet extends HttpServlet {
             request.setAttribute("totalPages", totalPages);
             request.setAttribute("totalFournisseurs", fournisseurDAO.countAll());
             FlashUtil.consume(request);
-            request.getRequestDispatcher("/views/fournisseur/liste.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/fournisseur/liste.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new ServletException("Impossible de charger les fournisseurs.", e);
         }

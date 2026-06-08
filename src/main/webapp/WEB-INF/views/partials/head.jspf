@@ -1,0 +1,255 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Système de Gestion de Supermarché">
+<meta name="keywords" content="supermarche,gestion,stock,vente,jakarta">
+<title>Gestion Supermarché</title>
+
+<!-- Fonts Google -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    if (window.tailwind) {
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        display: ['Fraunces', 'serif']
+                    },
+                    fontSize: {
+                        xs: ['0.72rem', { lineHeight: '1rem' }],
+                        sm: ['0.8rem', { lineHeight: '1.15rem' }],
+                        base: ['0.9rem', { lineHeight: '1.35rem' }],
+                        lg: ['1rem', { lineHeight: '1.45rem' }],
+                        xl: ['1.12rem', { lineHeight: '1.55rem' }],
+                        '2xl': ['1.28rem', { lineHeight: '1.75rem' }],
+                        '3xl': ['1.55rem', { lineHeight: '2rem' }],
+                        '4xl': ['1.9rem', { lineHeight: '2.35rem' }],
+                        '5xl': ['2.35rem', { lineHeight: '2.8rem' }],
+                        '6xl': ['2.85rem', { lineHeight: '3.25rem' }]
+                    },
+                    colors: {
+                        market: {
+                            cream: "#f4f8ff",
+                            parchment: "#e8f0ff",
+                            pine: "#1f3fb7",
+                            moss: "#2448d8",
+                            mint: "#d7e6ff",
+                            gold: "#f5a000",
+                            ember: "#ff4d4f",
+                            ink: "#171d2d",
+                            line: "#d7e4ff",
+                            shell: "#fbfdff"
+                        }
+                    },
+                    boxShadow: {
+                        panel: "0 14px 42px rgba(30, 64, 208, 0.08)",
+                        float: "0 10px 28px rgba(30, 64, 208, 0.12)"
+                    },
+                    borderRadius: {
+                        shell: "1.35rem"
+                    },
+                    backgroundImage: {
+                        "market-grid": "radial-gradient(circle at 1px 1px, rgba(31,63,183,0.08) 1px, transparent 0)",
+                        "market-glow": "radial-gradient(circle at top right, rgba(245,160,0,0.18), transparent 32%), radial-gradient(circle at bottom left, rgba(36,72,216,0.12), transparent 30%)"
+                    }
+                }
+            }
+        };
+    }
+</script>
+
+<!-- Fichier CSS Global -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+
+<style>
+/* ============================================================================
+   GESTION SUPERMARCHE - AJUSTEMENTS COMPACTS
+   ============================================================================ */
+:root {
+    --ui-radius-card: 1.35rem;
+    --ui-radius-control: 0.95rem;
+    --ui-shadow-panel: 0 14px 42px rgba(30, 64, 208, 0.08);
+    --ui-shadow-float: 0 10px 28px rgba(30, 64, 208, 0.12);
+}
+html { font-size: 87.5%; }
+@media (max-width: 640px) { html { font-size: 84%; } }
+body {
+    font-family: Manrope, sans-serif;
+    background-image: radial-gradient(circle at top, rgba(255,255,255,0.92), transparent 30rem), linear-gradient(180deg, #f7fbff 0%, #eff5ff 100%);
+    color: #171d2d;
+    font-size: 0.95rem;
+    line-height: 1.55;
+}
+::selection { background: rgba(36, 72, 216, 0.22); }
+button, input, select, textarea { font: inherit; }
+input, select, textarea { min-height: 2.75rem; }
+.text-lg { font-size: 1rem !important; line-height: 1.45rem !important; }
+.text-xl { font-size: 1.12rem !important; line-height: 1.55rem !important; }
+.text-2xl { font-size: 1.28rem !important; line-height: 1.75rem !important; }
+.text-3xl { font-size: 1.55rem !important; line-height: 2rem !important; }
+.text-4xl { font-size: 1.9rem !important; line-height: 2.35rem !important; }
+.text-5xl { font-size: 2.35rem !important; line-height: 2.8rem !important; }
+.text-6xl { font-size: 2.85rem !important; line-height: 3.25rem !important; }
+.p-8 { padding: 1.45rem !important; }
+.p-10 { padding: 1.75rem !important; }
+.px-5 { padding-left: 1rem !important; padding-right: 1rem !important; }
+.px-6 { padding-left: 1.15rem !important; padding-right: 1.15rem !important; }
+.px-8 { padding-left: 1.45rem !important; padding-right: 1.45rem !important; }
+.py-4 { padding-top: 0.85rem !important; padding-bottom: 0.85rem !important; }
+.py-5 { padding-top: 1rem !important; padding-bottom: 1rem !important; }
+.py-6 { padding-top: 1.15rem !important; padding-bottom: 1.15rem !important; }
+.gap-4 { gap: 0.85rem !important; }
+.gap-5 { gap: 1rem !important; }
+[class*="rounded-["]], .rounded-2xl { border-radius: var(--ui-radius-control) !important; }
+.glass-panel { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(18px); }
+.app-shell { min-height: 100vh; }
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    border-radius: var(--ui-radius-control);
+    padding: 0.68rem 0.8rem;
+    color: #262d42;
+    transition: all 180ms ease;
+}
+.sidebar-link:hover { background: #eef4ff; color: #1f3fb7; }
+.sidebar-link.active { background: #d8e7ff; color: #1f3fb7; box-shadow: inset 0 0 0 1px rgba(31,63,183,0.06); }
+.sidebar-icon { flex-shrink: 0; width: 1.15rem; height: 1.15rem; }
+.page-card { border-radius: var(--ui-radius-card) !important; border: 1px solid #d7e4ff; background: rgba(255,255,255,0.95); box-shadow: var(--ui-shadow-panel); }
+.shadow-panel { box-shadow: var(--ui-shadow-panel) !important; }
+.shadow-float { box-shadow: var(--ui-shadow-float) !important; }
+.text-balance { text-wrap: balance; }
+.safe-wrap { overflow-wrap: anywhere; word-break: break-word; }
+.metric-card { position: relative; overflow: hidden; }
+.metric-card::after { content: ""; position: absolute; inset: auto -10% -45% auto; width: 6rem; height: 6rem; border-radius: 9999px; background: rgba(255,255,255,0.08); }
+.blue-scroll::-webkit-scrollbar { width: 7px; height: 7px; }
+.blue-scroll::-webkit-scrollbar-thumb { background: rgba(31, 63, 183, 0.3); border-radius: 9999px; }
+.blue-scroll::-webkit-scrollbar-track { background: rgba(215, 228, 255, 0.55); }
+</style>
+
+<!-- ========== SCRIPT GLOBAL DE GESTION DU PANIER (accessible partout) ========== -->
+<script>
+    (function() {
+        const STORAGE_KEY = 'supermarche_cart';
+
+        // ---------- Fonctions privées ----------
+        function loadCartMap() {
+            const stored = sessionStorage.getItem(STORAGE_KEY);
+            if (!stored) return new Map();
+            try {
+                const obj = JSON.parse(stored);
+                return new Map(Object.entries(obj));
+            } catch(e) {
+                return new Map();
+            }
+        }
+
+        function saveCartMap(cartMap) {
+            const obj = Object.fromEntries(cartMap);
+            sessionStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+        }
+
+        function updateBadgeGlobal() {
+            const cart = loadCartMap();
+            const total = Array.from(cart.values()).reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelectorAll('#cartBadgeCount').forEach(badge => {
+                badge.textContent = total;
+            });
+        }
+
+        // ---------- API Publique ----------
+        window.CartManager = {
+            // Récupérer le panier (Map)
+            getCart: loadCartMap,
+
+            // Nombre total d'articles
+            getTotalItems: function() {
+                const cart = this.getCart();
+                return Array.from(cart.values()).reduce((sum, i) => sum + i.quantity, 0);
+            },
+
+            // Ajouter un produit
+            addItem: function(product) {
+                const cart = loadCartMap();
+                const existing = cart.get(product.id);
+                if (existing) {
+                    const newQty = existing.quantity + (product.quantity || 1);
+                    if (product.stock && newQty > product.stock) return false;
+                    existing.quantity = newQty;
+                } else {
+                    cart.set(product.id, {
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        quantity: product.quantity || 1,
+                        stock: product.stock || Infinity
+                    });
+                }
+                saveCartMap(cart);
+                this.notifyUpdate();
+                return true;
+            },
+
+            // Modifier quantité (+delta)
+            updateQuantity: function(id, delta, maxStock = Infinity) {
+                const cart = loadCartMap();
+                const item = cart.get(id);
+                if (!item) return false;
+                let newQty = item.quantity + delta;
+                if (newQty <= 0) {
+                    cart.delete(id);
+                } else if (newQty > maxStock) {
+                    newQty = maxStock;
+                    item.quantity = newQty;
+                } else {
+                    item.quantity = newQty;
+                }
+                saveCartMap(cart);
+                this.notifyUpdate();
+                return true;
+            },
+
+            // Supprimer un produit
+            removeItem: function(id) {
+                const cart = loadCartMap();
+                cart.delete(id);
+                saveCartMap(cart);
+                this.notifyUpdate();
+            },
+
+            // Vider le panier
+            clearCart: function() {
+                sessionStorage.removeItem(STORAGE_KEY);
+                this.notifyUpdate();
+            },
+
+            // Déclencher un événement pour rafraîchir l'interface
+            notifyUpdate: function() {
+                const event = new CustomEvent('cart:updated', { detail: this.getCart() });
+                window.dispatchEvent(event);
+                updateBadgeGlobal();
+            },
+
+            // Obtenir le tableau des articles
+            getItemsArray: function() {
+                return Array.from(this.getCart().values());
+            }
+        };
+
+        // Mettre à jour le badge au chargement de chaque page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBadgeGlobal();
+        });
+
+        // Écouter les mises à jour pour rafraîchir le badge
+        window.addEventListener('cart:updated', function() {
+            updateBadgeGlobal();
+        });
+    })();
+</script>

@@ -5,7 +5,6 @@ import com.supermarche.entity.Fournisseur;
 import com.supermarche.util.FlashUtil;
 import com.supermarche.util.FormUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/fournisseurs/update")
 public class ModifierFournisseurServlet extends HttpServlet {
 
     private final FournisseurDAO fournisseurDAO = new FournisseurDAO();

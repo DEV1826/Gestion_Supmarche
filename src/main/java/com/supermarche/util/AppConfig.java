@@ -2,7 +2,6 @@ package com.supermarche.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Locale;
 import java.util.Properties;
 
 public final class AppConfig {
@@ -63,7 +62,5 @@ public final class AppConfig {
         return phone == null ? "" : phone.trim().replace(" ", "");
     }
 
-    public static String envKeyForProperty(String propertyName) {
-        return propertyName.toUpperCase(Locale.ROOT).replace('.', '_');
-    }
+  
 }

@@ -4,7 +4,6 @@ import com.supermarche.dao.VenteDAO;
 import com.supermarche.entity.Vente;
 import com.supermarche.util.PDFUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -12,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/ventes/ticket")
 public class TicketServlet extends HttpServlet {
 
     private final VenteDAO venteDAO = new VenteDAO();
@@ -40,7 +38,7 @@ public class TicketServlet extends HttpServlet {
             }
 
             request.setAttribute("vente", vente);
-            request.getRequestDispatcher("/views/vente/ticket.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/vente/ticket.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new ServletException("Impossible de charger le ticket.", e);
         }

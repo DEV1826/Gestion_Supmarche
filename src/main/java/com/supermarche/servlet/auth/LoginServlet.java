@@ -4,7 +4,6 @@ import com.supermarche.dao.UtilisateurDAO;
 import com.supermarche.entity.Utilisateur;
 import com.supermarche.util.BCryptUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,7 +12,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     private final UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
@@ -21,7 +19,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        request.getRequestDispatcher("/views/auth/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
     }
 
     @Override
@@ -42,11 +40,11 @@ public class LoginServlet extends HttpServlet {
             throw new ServletException("Erreur de connexion a la base.", e);
         } catch (RuntimeException e) {
             request.setAttribute("erreur", "Compte invalide ou mot de passe non compatible. Recharge les utilisateurs par defaut.");
-            request.getRequestDispatcher("/views/auth/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
             return;
         }
 
         request.setAttribute("erreur", "Login ou mot de passe invalide.");
-        request.getRequestDispatcher("/views/auth/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
     }
 }

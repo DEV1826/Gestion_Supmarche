@@ -12,7 +12,6 @@ import com.supermarche.util.PaginationUtil;
 import com.supermarche.util.PDFUtil;
 import com.supermarche.util.SMSUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet("/stock/alertes")
 public class AlertesStockServlet extends HttpServlet {
 
     private final ProduitDAO produitDAO = new ProduitDAO();
@@ -64,7 +62,7 @@ public class AlertesStockServlet extends HttpServlet {
             request.setAttribute("totalFiltered", totalFiltered);
             request.setAttribute("totalPages", totalPages);
             FlashUtil.consume(request);
-            request.getRequestDispatcher("/views/stock/alertes.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/stock/alertes.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new ServletException("Impossible de charger les alertes stock.", e);
         }

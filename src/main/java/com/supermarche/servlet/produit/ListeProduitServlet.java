@@ -6,7 +6,6 @@ import com.supermarche.util.CSVUtil;
 import com.supermarche.util.FlashUtil;
 import com.supermarche.util.PaginationUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,7 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/produits")
 public class ListeProduitServlet extends HttpServlet {
 
     private final ProduitDAO produitDAO = new ProduitDAO();
@@ -73,7 +71,7 @@ public class ListeProduitServlet extends HttpServlet {
             request.setAttribute("totalProduits", produitDAO.countAll());
             request.setAttribute("totalAlertes", produitDAO.countAlertesStock());
             FlashUtil.consume(request);
-            request.getRequestDispatcher("/views/produit/liste.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/produit/liste.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new ServletException("Impossible de charger les produits.", e);
         }

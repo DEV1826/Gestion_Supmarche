@@ -1,40 +1,54 @@
 package com.supermarche.filter;
 
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
+import java.util.List;
 
-@WebFilter("/*")
 public class AuthFilter implements Filter {
 
+    // Chemins accessibles sans authentification
+    private static final List<String> PUBLIC_PATHS = List.of(
+        "/login",
+        "/css/",
+        "/js/",
+        "/images/",
+        "/WEB-INF/views/auth/"
+    );
+
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-        throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+            throws IOException, ServletException {
 
-        boolean publicPath = path.startsWith("/login")
-            || path.startsWith("/assets")
-            || path.equals("/")
-            || path.startsWith("/error");
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+        HttpSession session = request.getSession(false);
 
-        HttpSession session = httpRequest.getSession(false);
-        boolean connected = session != null && session.getAttribute("utilisateurConnecte") != null;
+        String uri = request.getRequestURI();
+        String contextPath = request.getContextPath();
+        String path = uri.substring(contextPath.length());
 
-        if (publicPath || connected) {
-            chain.doFilter(request, response);
+        // Vérifier si l'URI demandée est publique
+        boolean isPublic = PUBLIC_PATHS.stream().anyMatch(path::startsWith);
+
+        if (isPublic) {
+            chain.doFilter(req, res); // Accès libre
             return;
         }
 
-        httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
+        // Vérifier l'authentification pour les autres chemins
+        if (session != null && session.getAttribute("utilisateurConnecte") != null) {
+            chain.doFilter(req, res);
+        } else {
+            response.sendRedirect(contextPath + "/login");
+        }
     }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {}
+
+    @Override
+    public void destroy() {}
 }

@@ -1,0 +1,1465 @@
+\documentclass[11pt, aspectratio=169]{beamer}
+
+% ============================================================================
+% PACKAGES ET CONFIGURATION
+% ============================================================================
+
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{fancybox}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{lmodern}
+\usepackage{fontawesome5}
+
+% Configuration listings pour le code
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breakatwhitespace=true,
+    language=Java,
+    framextopmargin=5pt,
+    framebottom=5pt,
+    frameround=tttt
+}
+
+% ============================================================================
+% COULEURS PERSONNALISÉES - THÈME BLEU BLANC
+% ============================================================================
+
+\definecolor{DarkBlue}{RGB}{25, 80, 150}      % Bleu foncé principal
+\definecolor{LightBlue}{RGB}{173, 216, 230}   % Bleu clair
+\definecolor{MediumBlue}{RGB}{65, 130, 200}   % Bleu moyen
+\definecolor{DarkGray}{RGB}{50, 50, 50}       % Gris foncé
+\definecolor{LightGray}{RGB}{240, 240, 240}   % Gris clair
+\definecolor{Accent}{RGB}{220, 100, 50}       % Orange accent
+\definecolor{Success}{RGB}{76, 175, 80}       % Vert succès
+
+% ============================================================================
+% THÈME PERSONNALISÉ
+% ============================================================================
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Redéfinition des couleurs du thème
+\setbeamercolor{primary}{bg=DarkBlue, fg=white}
+\setbeamercolor{secondary}{bg=LightBlue, fg=DarkBlue}
+\setbeamercolor{structure}{fg=DarkBlue}
+\setbeamercolor{alerted text}{fg=Accent}
+\setbeamercolor{example text}{fg=Success}
+
+% Couleurs des titres et éléments
+\setbeamercolor{title}{fg=white, bg=DarkBlue}
+\setbeamercolor{subtitle}{fg=LightGray, bg=DarkBlue}
+\setbeamercolor{frametitle}{fg=white, bg=MediumBlue}
+\setbeamercolor{block title}{fg=white, bg=DarkBlue}
+\setbeamercolor{block body}{fg=DarkGray, bg=LightGray}
+\setbeamercolor{block title alerted}{fg=white, bg=Accent}
+\setbeamercolor{block body alerted}{fg=DarkGray, bg=white}
+
+% Style des boîtes
+\setbeamertemplate{blocks}[rounded][shadow=true]
+
+% Suppression du logo par défaut
+\setbeamertemplate{sidebar right}{}
+\setbeamertemplate{navigation symbols}{}
+
+% Pied de page
+\setbeamertemplate{footline}{%
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=.333333\paperwidth, ht=2.25ex, dp=1ex, center]{date in head/foot}%
+            \usebeamerfont{date in head/foot}
+            \insertframenumber{} / \inserttotalframenumber{}
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.333333\paperwidth, ht=2.25ex, dp=1ex, center]{date in head/foot}%
+            \usebeamerfont{date in head/foot}
+            Gestion Supermarché
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.333333\paperwidth, ht=2.25ex, dp=1ex, right]{date in head/foot}%
+            \usebeamerfont{date in head/foot}
+            \insertdate{}\hspace*{2em}
+        \end{beamercolorbox}%
+    }%
+    \vskip0pt%
+}
+
+% ============================================================================
+% INFORMATIONS DU DOCUMENT
+% ============================================================================
+
+\title[Gestion Supermarché]{Système de Gestion de Supermarché}
+\subtitle{Projet Jakarta EE - Groupe 07}
+\author{
+    \large \textbf{NANA TCHOFFO STEVE JUNIOR} \\
+    \normalsize Co-développeurs : [À compléter] \\
+    \normalsize Université de Yaoundé 1
+}
+\institute{
+    Filière : ICT4D \\
+    Cours : ICT318 - Jakarta Enterprise Edition \\
+    Année Académique : 2024-2025
+}
+\date{\today}
+
+% ============================================================================
+% DÉBUT DU DOCUMENT
+% ============================================================================
+
+\begin{document}
+
+% ============================================================================
+% PAGE DE GARDE
+% ============================================================================
+
+\begin{frame}[plain]
+    \begin{tikzpicture}[remember picture, overlay]
+        % Fond bleu gradient
+        \fill[color=DarkBlue] (current page.southwest) rectangle (current page.northeast);
+        
+        % Bande blanche décorative
+        \fill[color=white, opacity=0.1] (current page.northwest) -- ++(0, -2cm) -- ++(current page.width, 0) -- ++(0, 2cm) -- cycle;
+        
+        % Décoration géométrique
+        \draw[color=white, opacity=0.15, line width=2pt] (2, 3) rectangle (5, 5);
+        \draw[color=white, opacity=0.15, line width=2pt] (11, 1) circle (1.5cm);
+        \draw[color=LightBlue, opacity=0.15, line width=2pt] (current page.east) circle (3cm);
+    \end{tikzpicture}
+    
+    \begin{center}
+        \vspace{2cm}
+        
+        % Logo placeholder (l'utilisateur peut insérer le logo)
+        \framebox[1.2cm]{%
+            \parbox[c][1.2cm]{1.2cm}{%
+                \centering%
+                \small LOGO UY1
+            }%
+        }
+        
+        \vspace{1.5cm}
+        
+        % Titre principal
+        {\huge \textbf{\textcolor{white}{SYSTÈME DE GESTION DE SUPERMARCHÉ}}}
+        
+        \vspace{0.5cm}
+        
+        {\Large \textcolor{LightBlue}{Projet Jakarta Enterprise Edition}}
+        
+        \vspace{2cm}
+        
+        % Infos étudiant principal
+        {\Large \textbf{\textcolor{white}{NANA TCHOFFO STEVE JUNIOR}}}
+        
+        \vspace{0.3cm}
+        {\normalsize \textcolor{LightGray}{Étudiant principal - Développeur Backend}}
+        
+        \vspace{1.5cm}
+        
+        % Infos institution
+        {\normalsize \textcolor{white}{
+            \begin{tabular}{c}
+                \textbf{Université de Yaoundé 1} \\
+                Filière : ICT4D \\
+                Cours : ICT318 \\
+                Groupe : 07
+            \end{tabular}
+        }}
+        
+        \vspace{2cm}
+        
+        % Date
+        {\small \textcolor{LightGray}{\today}}
+    \end{center}
+\end{frame}
+
+% ============================================================================
+% DIAPO 2 : TABLE DES MATIÈRES
+% ============================================================================
+
+\begin{frame}[plain]
+    \frametitle{Table des Matières}
+    
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item[\textcolor{DarkBlue}{\large \textbf{I.}}] Présentation du Projet
+            \item[\textcolor{DarkBlue}{\large \textbf{II.}}] Objectives et Fonctionnalités
+            \item[\textcolor{DarkBlue}{\large \textbf{III.}}] Architecture Générale
+            \item[\textcolor{DarkBlue}{\large \textbf{IV.}}] Modèle de Données
+            \item[\textcolor{DarkBlue}{\large \textbf{V.}}] Diagrammes UML
+            \item[\textcolor{DarkBlue}{\large \textbf{VI.}}] Stack Technologique
+            \item[\textcolor{DarkBlue}{\large \textbf{VII.}}] Configuration et Déploiement
+            \item[\textcolor{DarkBlue}{\large \textbf{VIII.}}] Conclusion
+        \end{itemize}
+    \end{multicols}
+\end{frame}
+
+% ============================================================================
+% SECTION I : PRÉSENTATION DU PROJET
+% ============================================================================
+
+\section{Présentation du Projet}
+
+\begin{frame}
+    \frametitle{I. Présentation du Projet}
+    
+    \begin{block}{Contexte}
+        Développement d'une application web de gestion complète pour un supermarché,
+        intégrant la gestion des produits, des ventes, des fournisseurs et des stocks.
+    \end{block}
+    
+    \vspace{1cm}
+    
+    \begin{columns}[T]
+        \column{0.45\textwidth}
+        \begin{block}{Domaine Métier}
+            \begin{itemize}
+                \item[\faCheckCircle] Retail / Commerce
+                \item[\faCheckCircle] Gestion d'Inventaire
+                \item[\faCheckCircle] Point of Sale (POS)
+                \item[\faCheckCircle] Supply Chain
+            \end{itemize}
+        \end{block}
+        
+        \column{0.45\textwidth}
+        \begin{block}{Type d'Application}
+            \begin{itemize}
+                \item[\faServer] Web Application
+                \item[\faCode] Backend : Jakarta EE
+                \item[\faDisplay] Frontend : JSP + Bootstrap
+                \item[\faDatabase] BD : MySQL 8
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+% ============================================================================
+% SECTION II : OBJECTIFS ET FONCTIONNALITÉS
+% ============================================================================
+
+\section{Objectifs et Fonctionnalités}
+
+\begin{frame}
+    \frametitle{II.1 Objectifs Globaux}
+    
+    \begin{enumerate}
+        \item \textbf{Centraliser} la gestion des données du supermarché
+        \item \textbf{Automatiser} les processus de vente et d'inventaire
+        \item \textbf{Optimiser} la gestion des stocks et des alertes
+        \item \textbf{Générer} des rapports et bons de commande
+        \item \textbf{Sécuriser} l'accès aux données avec authentification
+        \item \textbf{Intégrer} les services SMS et Email pour les notifications
+    \end{enumerate}
+    
+    \vspace{1.5cm}
+    
+    \begin{alertblock}{Résultat Attendu}
+        Une plateforme robuste, sécurisée et ergonomique pour les caissiers,
+        gestionnaires de stock et administrateurs.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}
+    \frametitle{II.2 Fonctionnalités Principales}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Module Gestion Produits}
+            \begin{itemize}
+                \item[\faBox] CRUD complet (Créer, Lire, Modifier, Supprimer)
+                \item[\faBarcode] Codes-barres
+                \item[\faList] Catégorisation
+                \item[\faPricetag] Gestion des prix
+                \item[\faCalendar] Dates de péremption
+                \item[\faWarehouse] Gestion des stocks
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Module Ventes}
+            \begin{itemize}
+                \item[\faCashRegister] Point de Vente (Caisse)
+                \item[\faTicketAlt] Génération de tickets
+                \item[\faMoneyBillWave] Modes de paiement multiples
+                \item[\faChartLine] Historique des ventes
+                \item[\faFileInvoice] Facturation
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{II.3 Fonctionnalités Principales (Suite)}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Module Fournisseurs}
+            \begin{itemize}
+                \item[\faTruck] CRUD des fournisseurs
+                \item[\faFileContract] Bons de commande
+                \item[\faPDF] Export PDF
+                \item[\faEnvelope] Envoi par Email
+                \item[\faSms] Notification SMS
+                \item[\faCalendarDays] Délai de livraison
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Module Stock}
+            \begin{itemize}
+                \item[\faBell] Alertes de stock minimum
+                \item[\faEye] Surveillance en temps réel
+                \item[\faShieldAlt] Listener pour alertes automatiques
+                \item[\faFileExcel] Export CSV
+                \item[\faChartBar] Dashboard statistiques
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{II.4 Fonctionnalités Principales (Administration)}
+    
+    \begin{block}{Module Authentification \& Sécurité}
+        \begin{itemize}
+            \item[\faLock] Authentification par login/mot de passe
+            \item[\faCryptocurrency] Hashage BCrypt des mots de passe
+            \item[\faShield] Filtres de sécurité (AuthFilter)
+            \item[\faUserTie] Gestion des rôles (ADMIN, CAISSIER)
+            \item[\faUserCheck] Contrôle d'accès basé sur les rôles (RBAC)
+        \end{itemize}
+    \end{block}
+    
+    \vspace{0.8cm}
+    
+    \begin{block}{Module Administration}
+        \begin{itemize}
+            \item[\faUsers] Gestion des utilisateurs
+            \item[\faChartPie] Dashboard administrateur
+            \item[\faSync] Synchronisation des données
+            \item[\faToolbox] Maintenance et logs
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% ============================================================================
+% SECTION III : ARCHITECTURE GÉNÉRALE
+% ============================================================================
+
+\section{Architecture Générale}
+
+\begin{frame}
+    \frametitle{III.1 Architecture Générale du Système}
+    
+    \begin{center}
+        \begin{tikzpicture}[scale=0.9]
+            % Presentation Layer
+            \draw[fill=LightBlue, draw=DarkBlue, line width=2pt] (0, 8) rectangle (6, 9.5);
+            \node at (3, 8.75) {\textbf{\large Presentation Layer}};
+            \node[below] at (1.5, 8.3) {\small JSP};
+            \node[below] at (3, 8.3) {\small HTML/CSS};
+            \node[below] at (4.5, 8.3) {\small Bootstrap};
+            
+            % Business Layer
+            \draw[fill=white, draw=DarkBlue, line width=2pt] (0, 5.5) rectangle (6, 7.5);
+            \node at (3, 7.2) {\textbf{\large Business Layer}};
+            \node[below] at (1.5, 6.5) {\small Servlets};
+            \node[below] at (3, 6.5) {\small Business Logic};
+            \node[below] at (4.5, 6.5) {\small Controllers};
+            
+            % Data Layer
+            \draw[fill=LightGray, draw=DarkBlue, line width=2pt] (0, 3) rectangle (6, 5);
+            \node at (3, 4.3) {\textbf{\large Data Access Layer}};
+            \node[below] at (1.5, 3.6) {\small DAOs};
+            \node[below] at (3, 3.6) {\small JDBC};
+            \node[below] at (4.5, 3.6) {\small SQL Queries};
+            
+            % Database
+            \draw[fill=Accent, draw=DarkBlue, line width=2pt] (0, 0.5) rectangle (6, 2.5);
+            \node at (3, 1.8) {\textbf{\large Database Layer}};
+            \node[below] at (3, 1.1) {\textbf{MySQL 8}};
+            
+            % Arrows
+            \draw[->, line width=2pt, DarkBlue] (3, 8) -- (3, 7.5);
+            \draw[->, line width=2pt, DarkBlue] (3, 5.5) -- (3, 5);
+            \draw[->, line width=2pt, DarkBlue] (3, 3) -- (3, 2.5);
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.5cm}
+    
+    \begin{small}
+        \textbf{Architecture en 4 couches :} Présentation → Métier → Données → Base de Données
+    \end{small}
+\end{frame}
+
+\begin{frame}
+    \frametitle{III.2 Patrons de Conception}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{MVC Pattern}
+            \begin{itemize}
+                \item \textbf{Model :} Entités (Produit, Vente, etc.)
+                \item \textbf{View :} JSP avec JSTL
+                \item \textbf{Controller :} Servlets Jakarta
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{DAO Pattern}
+            \begin{itemize}
+                \item Isoler la logique d'accès aux données
+                \item Faciliter les tests unitaires
+                \item Classes DAO pour chaque entité
+            \end{itemize}
+        \end{block}
+    \end{columns}
+    
+    \vspace{1cm}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Singleton Pattern}
+            \begin{itemize}
+                \item Configuration centralisée (AppConfig)
+                \item Connexion à la BD unique
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Observer Pattern}
+            \begin{itemize}
+                \item Listeners pour alertes de stock
+                \item Événements automatiques
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{III.3 Structure des Packages}
+    
+    \begin{small}
+        \begin{itemize}
+            \item \textbf{com.supermarche.entity} \quad Modèles métier
+            \begin{itemize}
+                \item \textit{Produit, Fournisseur, Utilisateur, Vente, LigneVente}
+            \end{itemize}
+            
+            \item \textbf{com.supermarche.dao} \quad Accès aux données
+            \begin{itemize}
+                \item \textit{ProduitDAO, FournisseurDAO, UtilisateurDAO, VenteDAO, LigneVenteDAO}
+            \end{itemize}
+            
+            \item \textbf{com.supermarche.servlet} \quad Contrôleurs
+            \begin{itemize}
+                \item \textit{HomeServlet, auth, dashboard, produit, fournisseur, vente, stock, stats}
+            \end{itemize}
+            
+            \item \textbf{com.supermarche.filter} \quad Sécurité
+            \begin{itemize}
+                \item \textit{AuthFilter pour l'authentification}
+            \end{itemize}
+            
+            \item \textbf{com.supermarche.listener} \quad Événements
+            \begin{itemize}
+                \item \textit{StockAlertListener pour les alertes}
+            \end{itemize}
+            
+            \item \textbf{com.supermarche.util} \quad Utilitaires
+            \begin{itemize}
+                \item \textit{AppConfig, BCryptUtil, PDF, CSV, SMS, Email}
+            \end{itemize}
+        \end{itemize}
+    \end{small}
+\end{frame}
+
+% ============================================================================
+% SECTION IV : MODÈLE DE DONNÉES
+% ============================================================================
+
+\section{Modèle de Données}
+
+\begin{frame}
+    \frametitle{IV.1 Diagramme Entité-Relation (MER)}
+    
+    \begin{center}
+        \begin{tikzpicture}[scale=0.85, node distance=3cm]
+            % Table Utilisateur
+            \draw[fill=LightBlue, draw=DarkBlue, line width=1.5pt] (1, 7) rectangle (4, 9);
+            \node[anchor=north] at (2.5, 8.85) {\textbf{UTILISATEUR}};
+            \draw (1, 8.7) -- (4, 8.7);
+            \node[anchor=west] at (1.1, 8.4) {id (PK)};
+            \node[anchor=west] at (1.1, 8.0) {nom, prénom};
+            \node[anchor=west] at (1.1, 7.6) {login (U)};
+            \node[anchor=west] at (1.1, 7.2) {mot\_de\_passe};
+            
+            % Table Fournisseur
+            \draw[fill=LightBlue, draw=DarkBlue, line width=1.5pt] (6, 7) rectangle (9, 9);
+            \node[anchor=north] at (7.5, 8.85) {\textbf{FOURNISSEUR}};
+            \draw (6, 8.7) -- (9, 8.7);
+            \node[anchor=west] at (6.1, 8.4) {id (PK)};
+            \node[anchor=west] at (6.1, 8.0) {raison\_sociale};
+            \node[anchor=west] at (6.1, 7.6) {téléphone, email};
+            \node[anchor=west] at (6.1, 7.2) {délai\_livraison};
+            
+            % Table Produit
+            \draw[fill=LightBlue, draw=DarkBlue, line width=1.5pt] (3, 3.5) rectangle (7, 5.5);
+            \node[anchor=north] at (5, 5.35) {\textbf{PRODUIT}};
+            \draw (3, 5.2) -- (7, 5.2);
+            \node[anchor=west] at (3.1, 4.9) {id (PK)};
+            \node[anchor=west] at (3.1, 4.5) {code\_barre (U)};
+            \node[anchor=west] at (3.1, 4.1) {designation, catégorie};
+            \node[anchor=west] at (3.1, 3.7) {prix\_achat, prix\_vente};
+            
+            % Table Vente
+            \draw[fill=LightBlue, draw=DarkBlue, line width=1.5pt] (0.5, 0.5) rectangle (3.5, 2.5);
+            \node[anchor=north] at (2, 2.35) {\textbf{VENTE}};
+            \draw (0.5, 2.2) -- (3.5, 2.2);
+            \node[anchor=west] at (0.6, 1.9) {id (PK)};
+            \node[anchor=west] at (0.6, 1.5) {caissier\_id (FK)};
+            \node[anchor=west] at (0.6, 1.1) {date\_heure};
+            \node[anchor=west] at (0.6, 0.7) {total\_ttc};
+            
+            % Table LigneVente
+            \draw[fill=LightBlue, draw=DarkBlue, line width=1.5pt] (5, 0.5) rectangle (8, 2.5);
+            \node[anchor=north] at (6.5, 2.35) {\textbf{LIGNE\_VENTE}};
+            \draw (5, 2.2) -- (8, 2.2);
+            \node[anchor=west] at (5.1, 1.9) {id (PK)};
+            \node[anchor=west] at (5.1, 1.5) {vente\_id (FK)};
+            \node[anchor=west] at (5.1, 1.1) {produit\_id (FK)};
+            \node[anchor=west] at (5.1, 0.7) {quantité, sous-total};
+            
+            % Relations
+            \draw[->] (2, 7) -- (2, 5.5); % Caissier -> Vente
+            \draw[->] (6, 7) -- (6, 5.5); % Fournisseur -> Produit
+            \draw[->] (2, 2.5) -- (6, 2.5); % Vente -> LigneVente
+            \draw[->] (6, 2.5) -- (6, 3.5); % LigneVente -> Produit
+        \end{tikzpicture}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{IV.2 Entité Produit}
+    
+    \begin{block}{Classe Produit}
+        \begin{lstlisting}[language=Java]
+public class Produit {
+    private Long id;
+    private String codeBarre;           // Unique
+    private String designation;
+    private String categorie;
+    private BigDecimal prixAchat;
+    private BigDecimal prixVente;
+    private int stockActuel;            // Quantité en stock
+    private int stockMinimum;           // Seuil d'alerte
+    private LocalDate datePeremption;
+    private Long fournisseurId;         // FK -> Fournisseur
+    private Fournisseur fournisseur;    // Référence objet
+}
+        \end{lstlisting}
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    \begin{small}
+        \textbf{Caractéristiques :} Code-barre unique, Gestion des stocks avec seuil minimum,
+        Dates de péremption, Lien avec fournisseur
+    \end{small}
+\end{frame}
+
+\begin{frame}
+    \frametitle{IV.3 Entité Vente}
+    
+    \begin{block}{Classe Vente}
+        \begin{lstlisting}[language=Java]
+public class Vente {
+    public enum ModePaiement {
+        ESPECES, CARTE, MOBILE_MONEY
+    }
+    
+    private Long id;
+    private Long caissierId;            // FK -> Utilisateur
+    private LocalDateTime dateHeure;
+    private BigDecimal totalTtc;
+    private ModePaiement modePaiement;
+    private String numeroTicket;        // Unique
+    private Utilisateur caissier;
+    private List<LigneVente> lignes;    // Produits vendus
+    
+    public void calculerTotal() {
+        // Somme des sous-totaux
+    }
+}
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{IV.4 Entité Utilisateur \& Fournisseur}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Utilisateur}
+            \begin{lstlisting}[language=Java, basicstyle=\ttfamily\tiny]
+public class Utilisateur {
+    public enum Role {
+        ADMIN, CAISSIER
+    }
+    
+    private Long id;
+    private String nom;
+    private String prenom;
+    private String login;  // Unique
+    private String motDePasse;  // BCrypt
+    private Role role;
+    private boolean actif;
+    private LocalDateTime dateCreation;
+}
+            \end{lstlisting}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Fournisseur}
+            \begin{lstlisting}[language=Java, basicstyle=\ttfamily\tiny]
+public class Fournisseur {
+    private Long id;
+    private String raisonSociale;  // Unique
+    private String telephone;
+    private String email;
+    private int delaiLivraisonJours;
+    private String conditionsPaiement;
+}
+            \end{lstlisting}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+% ============================================================================
+% SECTION V : DIAGRAMMES UML
+% ============================================================================
+
+\section{Diagrammes UML}
+
+\begin{frame}
+    \frametitle{V.1 Cas d'Usage (Use Cases) - Caissier}
+    
+    \begin{center}
+        \begin{tikzpicture}[scale=1.0]
+            % Acteur
+            \draw (1, 2) circle (0.3);
+            \draw (1, 2) -- (1, 1.2);
+            \draw (0.7, 1.5) -- (1.3, 1.5);
+            \draw (0.7, 1.2) -- (1, 0.7);
+            \draw (1.3, 1.2) -- (1, 0.7);
+            \node[below] at (1, 0.5) {\small Caissier};
+            
+            % Système
+            \draw[DarkBlue, line width=2pt] (3, 0.5) rectangle (6, 4);
+            \node at (4.5, 3.7) {\textbf{Système}};
+            
+            % Use cases
+            \draw[rounded rectangle, rounded rectangle arc=90, draw=DarkBlue, fill=LightBlue, line width=1.5pt] 
+                (3.5, 3) rectangle (5.5, 3.5);
+            \node at (4.5, 3.25) {Effectuer une vente};
+            
+            \draw[rounded rectangle, rounded rectangle arc=90, draw=DarkBlue, fill=LightBlue, line width=1.5pt] 
+                (3.5, 2.2) rectangle (5.5, 2.7);
+            \node at (4.5, 2.45) {Consulter stock};
+            
+            \draw[rounded rectangle, rounded rectangle arc=90, draw=DarkBlue, fill=LightBlue, line width=1.5pt] 
+                (3.5, 1.4) rectangle (5.5, 1.9);
+            \node at (4.5, 1.65) {Imprimer ticket};
+            
+            % Relations
+            \draw[->] (1.3, 2) -- (3.5, 3.2);
+            \draw[->] (1.3, 2) -- (3.5, 2.45);
+            \draw[->] (1.3, 2) -- (3.5, 1.65);
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.8cm}
+    
+    \textbf{Cas d'usage principaux :}
+    \begin{itemize}
+        \item Effectuer une vente avec liste de produits
+        \item Consulter stock disponible
+        \item Générer et imprimer ticket
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{V.2 Cas d'Usage (Use Cases) - Administrateur}
+    
+    \begin{center}
+        \begin{tikzpicture}[scale=0.95]
+            % Acteur Admin
+            \draw (0.8, 2) circle (0.3);
+            \draw (0.8, 2) -- (0.8, 1.2);
+            \draw (0.5, 1.5) -- (1.1, 1.5);
+            \draw (0.5, 1.2) -- (0.8, 0.7);
+            \draw (1.1, 1.2) -- (0.8, 0.7);
+            \node[below] at (0.8, 0.4) {\small Admin};
+            
+            % Système
+            \draw[DarkBlue, line width=2pt] (2.5, 0.3) rectangle (5.5, 4);
+            \node at (4, 3.8) {\textbf{Système}};
+            
+            % Use cases
+            \draw[rounded rectangle, rounded rectangle arc=90, draw=DarkBlue, fill=LightBlue, line width=1.5pt] 
+                (3, 3.3) rectangle (5, 3.8);
+            \node at (4, 3.55) {Gérer produits};
+            
+            \draw[rounded rectangle, rounded rectangle arc=90, draw=DarkBlue, fill=LightBlue, line width=1.5pt] 
+                (3, 2.5) rectangle (5, 3);
+            \node at (4, 2.75) {Gérer fournisseurs};
+            
+            \draw[rounded rectangle, rounded rectangle arc=90, draw=DarkBlue, fill=LightBlue, line width=1.5pt] 
+                (3, 1.7) rectangle (5, 2.2);
+            \node at (4, 1.95) {Générer bon de commande};
+            
+            \draw[rounded rectangle, rounded rectangle arc=90, draw=DarkBlue, fill=LightBlue, line width=1.5pt] 
+                (3, 0.9) rectangle (5, 1.4);
+            \node at (4, 1.15) {Voir statistiques};
+            
+            % Relations
+            \draw[->] (1.1, 2) -- (3, 3.55);
+            \draw[->] (1.1, 2) -- (3, 2.75);
+            \draw[->] (1.1, 2) -- (3, 1.95);
+            \draw[->] (1.1, 2) -- (3, 1.15);
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.8cm}
+    
+    \textbf{Cas d'usage Admin :}
+    \begin{itemize}
+        \item CRUD complet produits et fournisseurs
+        \item Génération de bons de commande PDF
+        \item Dashboard statistiques
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{V.3 Diagramme de Flux - Processus de Vente}
+    
+    \begin{center}
+        \begin{tikzpicture}[scale=0.85, node distance=2cm]
+            % Start
+            \draw[fill=Success, circle, draw=DarkBlue, line width=1.5pt] (3, 10) circle (0.4);
+            \node[white] at (3, 10) {S};
+            
+            % Steps
+            \node[rectangle, rounded corners, draw=DarkBlue, fill=LightBlue, line width=1.5pt, minimum width=3cm] 
+                (a) at (3, 8.5) {Sélectionner produits};
+            
+            \node[rectangle, rounded corners, draw=DarkBlue, fill=LightBlue, line width=1.5pt, minimum width=3cm] 
+                (b) at (3, 7) {Ajouter à panier};
+            
+            \node[rectangle, rounded corners, draw=DarkBlue, fill=LightBlue, line width=1.5pt, minimum width=3cm] 
+                (c) at (3, 5.5) {Vérifier stock};
+            
+            \node[rectangle, rounded corners, draw=DarkBlue, fill=LightBlue, line width=1.5pt, minimum width=3cm] 
+                (d) at (3, 4) {Calculer total};
+            
+            \node[rectangle, rounded corners, draw=DarkBlue, fill=LightBlue, line width=1.5pt, minimum width=3cm] 
+                (e) at (3, 2.5) {Choisir mode paiement};
+            
+            \node[rectangle, rounded corners, draw=DarkBlue, fill=LightBlue, line width=1.5pt, minimum width=3cm] 
+                (f) at (3, 1) {Valider \& Imprimer};
+            
+            % End
+            \draw[fill=Accent, circle, draw=DarkBlue, line width=1.5pt] (3, -0.5) circle (0.4);
+            \node[white] at (3, -0.5) {F};
+            
+            % Arrows
+            \draw[->, line width=1.5pt, DarkBlue] (3, 9.6) -- (a);
+            \draw[->, line width=1.5pt, DarkBlue] (a) -- (b);
+            \draw[->, line width=1.5pt, DarkBlue] (b) -- (c);
+            \draw[->, line width=1.5pt, DarkBlue] (c) -- (d);
+            \draw[->, line width=1.5pt, DarkBlue] (d) -- (e);
+            \draw[->, line width=1.5pt, DarkBlue] (e) -- (f);
+            \draw[->, line width=1.5pt, DarkBlue] (f) -- (3, -0.1);
+        \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.5cm}
+    \begin{small}
+        \textbf{Flux complet d'une transaction de vente}
+    \end{small}
+\end{frame}
+
+\begin{frame}
+    \frametitle{V.4 Diagramme de Classe Simplifié}
+    
+    \begin{small}
+        \begin{center}
+            \begin{tikzpicture}[scale=0.8]
+                % Classe Produit
+                \draw[draw=DarkBlue, fill=LightBlue, line width=1.5pt] (0, 6) rectangle (3, 8);
+                \node[anchor=north] at (1.5, 7.85) {\textbf{Produit}};
+                \draw (0, 7.7) -- (3, 7.7);
+                \node[anchor=west, font=\tiny] at (0.1, 7.4) {- codeBarre: String};
+                \node[anchor=west, font=\tiny] at (0.1, 7.1) {- prix\_achat: BigDecimal};
+                \node[anchor=west, font=\tiny] at (0.1, 6.8) {- stockActuel: int};
+                \draw (0, 6.5) -- (3, 6.5);
+                \node[anchor=west, font=\tiny] at (0.1, 6.2) {+ getPrix()};
+                
+                % Classe Vente
+                \draw[draw=DarkBlue, fill=LightBlue, line width=1.5pt] (4, 6) rectangle (7, 8);
+                \node[anchor=north] at (5.5, 7.85) {\textbf{Vente}};
+                \draw (4, 7.7) -- (7, 7.7);
+                \node[anchor=west, font=\tiny] at (4.1, 7.4) {- numeroTicket: String};
+                \node[anchor=west, font=\tiny] at (4.1, 7.1) {- totalTtc: BigDecimal};
+                \node[anchor=west, font=\tiny] at (4.1, 6.8) {- lignes: List};
+                \draw (4, 6.5) -- (7, 6.5);
+                \node[anchor=west, font=\tiny] at (4.1, 6.2) {+ calculerTotal()};
+                
+                % Classe LigneVente
+                \draw[draw=DarkBlue, fill=LightBlue, line width=1.5pt] (2, 3.5) rectangle (5, 5.5);
+                \node[anchor=north] at (3.5, 5.35) {\textbf{LigneVente}};
+                \draw (2, 5.2) -- (5, 5.2);
+                \node[anchor=west, font=\tiny] at (2.1, 4.9) {- quantite: int};
+                \node[anchor=west, font=\tiny] at (2.1, 4.6) {- sousTotal: BigDecimal};
+                \node[anchor=west, font=\tiny] at (2.1, 4.3) {- produit: Produit};
+                \draw (2, 4) -- (5, 4);
+                \node[anchor=west, font=\tiny] at (2.1, 3.7) {+ calculer()};
+                
+                % Relations
+                \draw[->] (3.5, 5.5) -- (1.5, 8);
+                \draw[->] (3.5, 5.5) -- (5.5, 8);
+            \end{tikzpicture}
+        \end{center}
+    \end{small}
+\end{frame}
+
+% ============================================================================
+% SECTION VI : STACK TECHNOLOGIQUE
+% ============================================================================
+
+\section{Stack Technologique}
+
+\begin{frame}
+    \frametitle{VI.1 Technologies Backend}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Plateforme}
+            \begin{itemize}
+                \item[\faJava] \textbf{Java 17}
+                \item[\faCode] \textbf{Jakarta EE 10}
+                \item[\faDatabase] \textbf{MySQL 8.3}
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Framework Web}
+            \begin{itemize}
+                \item[\faServer] \textbf{Servlets Jakarta}
+                \item[\faFileAlt] \textbf{JSP (JavaServer Pages)}
+                \item[\faTag] \textbf{JSTL 3.0}
+            \end{itemize}
+        \end{block}
+    \end{columns}
+    
+    \vspace{1cm}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Sécurité \& Crypto}
+            \begin{itemize}
+                \item[\faLock] \textbf{BCrypt} (Hashage mots de passe)
+                \item[\faShield] \textbf{AuthFilter} (Authentification)
+                \item[\faUserLock] RBAC (Contrôle d'accès)
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Base de Données}
+            \begin{itemize}
+                \item[\faDatabase] \textbf{MySQL Connector/J 8.3}
+                \item[\faCodeBranch] \textbf{JDBC} (Accès)
+                \item[\faKey] Clés primaires et étrangères
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VI.2 Technologies Frontend \& Utilitaires}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Présentation}
+            \begin{itemize}
+                \item[\faFileCode] \textbf{HTML5 / CSS3}
+                \item[\faCheckSquare] \textbf{Bootstrap 5}
+                \item[\faGithub] \textbf{Font Awesome} (Icônes)
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Génération de Documents}
+            \begin{itemize}
+                \item[\faPDF] \textbf{iText 8.0.3} (PDF)
+                \item[\faFileCsv] \textbf{OpenCSV 5.9} (Export)
+            \end{itemize}
+        \end{block}
+    \end{columns}
+    
+    \vspace{1cm}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Communication}
+            \begin{itemize}
+                \item[\faSms] \textbf{Twilio 11.0.3} (SMS)
+                \item[\faEnvelope] \textbf{Jakarta Mail} (Email)
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Logging \& Build}
+            \begin{itemize}
+                \item[\faFileAlt] \textbf{SLF4J / Logback} (Logs)
+                \item[\faToolbox] \textbf{Maven 3.x} (Build)
+                \item[\faServer] \textbf{Jetty 12.0.7} (Runtime)
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VI.3 Dépendances Maven}
+    
+    \begin{small}
+        \begin{block}{Dépendances Principales}
+            \begin{itemize}
+                \item \texttt{jakarta.platform:jakarta.jakartaee-web-api:10.0.0}
+                \item \texttt{jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0}
+                \item \texttt{com.mysql:mysql-connector-j:8.3.0}
+                \item \texttt{at.favre.lib:bcrypt:0.10.2}
+                \item \texttt{com.itextpdf:kernel,layout:8.0.3}
+                \item \texttt{com.opencsv:opencsv:5.9}
+                \item \texttt{com.twilio.sdk:twilio:11.0.3}
+                \item \texttt{org.eclipse.angus:jakarta.mail:2.0.3}
+                \item \texttt{org.slf4j:slf4j-api:2.0.12}
+                \item \texttt{ch.qos.logback:logback-classic:1.4.14}
+            \end{itemize}
+        \end{block}
+    \end{small}
+\end{frame}
+
+% ============================================================================
+% SECTION VII : CONFIGURATION ET DÉPLOIEMENT
+% ============================================================================
+
+\section{Configuration et Déploiement}
+
+\begin{frame}
+    \frametitle{VII.1 Configuration de la Base de Données}
+    
+    \begin{block}{Schéma SQL - Tables Principales}
+        \begin{lstlisting}[language=SQL, basicstyle=\ttfamily\tiny]
+CREATE TABLE utilisateur (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    login VARCHAR(80) NOT NULL UNIQUE,
+    mot_de_passe VARCHAR(255) NOT NULL,    -- BCrypt hashed
+    role ENUM('ADMIN','CAISSIER'),
+    actif BOOLEAN DEFAULT TRUE,
+    date_creation DATETIME DEFAULT NOW()
+);
+
+CREATE TABLE fournisseur (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    raison_sociale VARCHAR(150) UNIQUE,
+    email VARCHAR(150),
+    delai_livraison_jours INT DEFAULT 7
+);
+
+CREATE TABLE produit (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    code_barre VARCHAR(30) UNIQUE,
+    designation VARCHAR(150),
+    categorie VARCHAR(80),
+    prix_achat DECIMAL(10,2),
+    prix_vente DECIMAL(10,2),
+    stock_actuel INT DEFAULT 0,
+    stock_minimum INT DEFAULT 5,
+    date_peremption DATE,
+    fournisseur_id BIGINT,
+    FOREIGN KEY (fournisseur_id) REFERENCES fournisseur(id)
+);
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VII.2 Configuration de l'Application}
+    
+    \begin{block}{Variables d'Environnement (app.properties / env)}
+        \begin{lstlisting}[language=bash, basicstyle=\ttfamily\small]
+# Database Configuration
+DB_URL=jdbc:mysql://localhost:3306/supermarche
+DB_USERNAME=root
+DB_PASSWORD=your_password
+
+# Twilio SMS Configuration
+SMS_ENABLED=true
+TWILIO_ACCOUNT_SID=ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TWILIO_FROM_NUMBER=+237657786440
+
+# Email SMTP Configuration
+MAIL_ENABLED=true
+MAIL_SMTP_HOST=smtp.gmail.com
+MAIL_SMTP_PORT=587
+MAIL_SMTP_USERNAME=your_email@gmail.com
+MAIL_SMTP_PASSWORD=your_app_password
+MAIL_SMTP_FROM=your_email@gmail.com
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VII.3 Déploiement et Exécution}
+    
+    \begin{block}{Étape 1 : Créer la Base de Données}
+        \begin{lstlisting}[language=bash, basicstyle=\ttfamily\small]
+# Lancer MySQL et créer la BD
+mysql -u root -p < src/main/resources/schema.sql
+        \end{lstlisting}
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    \begin{block}{Étape 2 : Compiler avec Maven}
+        \begin{lstlisting}[language=bash, basicstyle=\ttfamily\small]
+# Compiler et packager
+mvn clean package
+        \end{lstlisting}
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    \begin{block}{Étape 3 : Lancer l'Application}
+        \begin{lstlisting}[language=bash, basicstyle=\ttfamily\small]
+# Démarrer Jetty
+mvn org.eclipse.jetty.ee10:jetty-ee10-maven-plugin:12.0.7:run
+
+# Accéder à : http://localhost:8080/supermarche
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VII.4 Comptes par Défaut \& Configuration}
+    
+    \begin{block}{Utilisateurs par Défaut}
+        \begin{itemize}
+            \item \textbf{Admin :} \texttt{login: admin} / \texttt{mot de passe: admin123} (Rôle: ADMIN)
+            \item \textbf{Caissière :} \texttt{login: sophie} / \texttt{mot de passe: admin123} (Rôle: CAISSIER)
+        \end{itemize}
+    \end{block}
+    
+    \vspace{1cm}
+    
+    \begin{block}{Sécurité}
+        Les mots de passe sont stockés en \textbf{BCrypt}, jamais en clair.
+        
+        \begin{lstlisting}[language=SQL, basicstyle=\ttfamily\tiny]
+-- Mettre à jour les mots de passe (s'ils ne sont pas corrects)
+UPDATE utilisateur
+SET mot_de_passe = '$2a$12$kaiE7qTm97vdXSCqBVPYW.WOuLOB0ieoxwcfyYC.fCiy7SxuhxXWu'
+WHERE login IN ('admin', 'sophie');
+        \end{lstlisting}
+    \end{block}
+\end{frame}
+
+% ============================================================================
+% SECTION VIII : FONCTIONNALITÉS DÉTAILLÉES
+% ============================================================================
+
+\section{Fonctionnalités Détaillées}
+
+\begin{frame}
+    \frametitle{VIII.1 Module Gestion des Produits}
+    
+    \begin{block}{Servlets Impliquées}
+        \begin{itemize}
+            \item[\faList] \textbf{ListeProduitServlet} → Affiche liste paginée
+            \item[\faWrench] \textbf{FormProduitServlet} → Affiche formulaire
+            \item[\faPlus] \textbf{AjouterProduitServlet} → Crée nouveau produit
+            \item[\faEdit] \textbf{ModifierProduitServlet} → Modifie produit existant
+            \item[\faTrash] \textbf{SupprimerProduitServlet} → Supprime produit
+        \end{itemize}
+    \end{block}
+    
+    \vspace{0.8cm}
+    
+    \begin{block}{Fonctionnalités}
+        \begin{itemize}
+            \item CRUD complet (Create, Read, Update, Delete)
+            \item Code-barre unique par produit
+            \item Gestion du stock (actuel vs. minimum)
+            \item Prix d'achat et de vente distincts
+            \item Catégorisation des produits
+            \item Dates de péremption
+            \item Association fournisseur
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VIII.2 Module Gestion des Fournisseurs}
+    
+    \begin{block}{Servlets Impliquées}
+        \begin{itemize}
+            \item[\faList] \textbf{ListeFournisseurServlet} → Liste des fournisseurs
+            \item[\faWrench] \textbf{FormFournisseurServlet} → Formulaire
+            \item[\faPlus] \textbf{AjouterFournisseurServlet} → Ajouter
+            \item[\faEdit] \textbf{ModifierFournisseurServlet} → Modifier
+            \item[\faFileContract] \textbf{BonCommandeFournisseurServlet} → Bon de commande
+        \end{itemize}
+    \end{block}
+    
+    \vspace{0.8cm}
+    
+    \begin{block}{Spécificités}
+        \begin{itemize}
+            \item CRUD des fournisseurs
+            \item Génération de bons de commande en PDF
+            \item Envoi automatique par Email
+            \item Notification SMS optionnelle
+            \item Délai de livraison
+            \item Conditions de paiement
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VIII.3 Module Caisse \& Ventes}
+    
+    \begin{block}{Processus}
+        \begin{itemize}
+            \item[\faCashRegister] Sélection des produits par code-barre
+            \item[\faShoppingCart] Panier dynamique
+            \item[\faCalculator] Calcul automatique des totaux
+            \item[\faMoneyBillWave] Choix du mode de paiement (Espèces, Carte, Mobile)
+            \item[\faTicketAlt] Génération de ticket
+        \end{itemize}
+    \end{block}
+    
+    \vspace{0.8cm}
+    
+    \begin{block}{Servlets}
+        \begin{itemize}
+            \item \textbf{CaisseServlet} → Interface caisse
+            \item \textbf{ValiderVenteServlet} → Validation transaction
+            \item \textbf{TicketVenteServlet} → Impression ticket
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VIII.4 Module Stock \& Alertes}
+    
+    \begin{block}{Fonctionnalités}
+        \begin{itemize}
+            \item[\faBell] Alertes automatiques quand stock \textless{} minimum
+            \item[\faEye] Monitoring en temps réel
+            \item[\faWarning] Listener pour événements de stock
+            \item[\faShoppingCart] Décrément automatique lors de ventes
+            \item[\faTruck] Suggestion de commande fournisseur
+        \end{itemize}
+    \end{block}
+    
+    \vspace{0.8cm}
+    
+    \begin{block}{Implémentation}
+        \textbf{StockAlertListener} utilise le pattern Observer pour :
+        \begin{itemize}
+            \item Notifier les administrateurs
+            \item Déclencher les bons de commande automatiquement
+            \item Logger les événements critiques
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VIII.5 Module Authentification \& Sécurité}
+    
+    \begin{block}{Mécanisme}
+        \begin{enumerate}
+            \item Utilisateur saisit login + mot de passe
+            \item \textbf{BCrypt} vérifie le mot de passe
+            \item Création de session Jakarta
+            \item \textbf{AuthFilter} contrôle chaque requête
+            \item \textbf{RBAC} : Admin vs Caissier
+        \end{enumerate}
+    \end{block}
+    
+    \vspace{0.8cm}
+    
+    \begin{block}{Sécurité}
+        \begin{itemize}
+            \item[\faLock] Mots de passe hashés avec BCrypt
+            \item[\faShieldAlt] Pas de session = redirection login
+            \item[\faUserLock] Rôles contrôlent l'accès
+            \item[\faEyeSlash] Données sensibles jamais loggées
+            \item[\faLockOpen] Session expire après inactivité
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{VIII.6 Utilitaires \& Services}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{AppConfig}
+            \begin{itemize}
+                \item Singleton de configuration
+                \item Variables d'environnement
+                \item Propriétés applicatives
+                \item Connexion BD centralisée
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Services}
+            \begin{itemize}
+                \item \textbf{PDFGenerator} : Bons, factures
+                \item \textbf{CSVExporter} : Export données
+                \item \textbf{SMSService} : Twilio
+                \item \textbf{EmailService} : Jakarta Mail
+            \end{itemize}
+        \end{block}
+    \end{columns}
+\end{frame}
+
+% ============================================================================
+% SECTION IX : MODÈLE DE DONNÉES GRAPHIQUE
+% ============================================================================
+
+\section{Modèle de Données}
+
+\begin{frame}
+    \frametitle{IX. Schéma Complet de la Base de Données}
+    
+    \begin{center}
+        \small
+        \begin{tabular}{|c|c|c|}
+            \hline
+            \rowcolor{LightBlue}
+            \textbf{Table} & \textbf{Colonnes Principales} & \textbf{Contraintes} \\
+            \hline
+            \hline
+            \textbf{utilisateur} & id, nom, login, mot\_de\_passe, role, actif & PK: id, U: login \\
+            \hline
+            \textbf{fournisseur} & id, raison\_sociale, email, téléphone, délai & PK: id, U: rais\_soc \\
+            \hline
+            \textbf{produit} & id, code\_barre, designation, prix\_achat, stock & PK: id, U: code\_barre \\
+            & categorie, date\_peremption, fournisseur\_id & FK: fournisseur\_id \\
+            \hline
+            \textbf{vente} & id, caissier\_id, date\_heure, total\_ttc & PK: id, FK: caissier\_id \\
+            & mode\_paiement, numero\_ticket & U: numero\_ticket \\
+            \hline
+            \textbf{ligne\_vente} & id, vente\_id, produit\_id, quantite & PK: id \\
+            & sous\_total & FK: vente\_id, produit\_id \\
+            \hline
+        \end{tabular}
+    \end{center}
+    
+    \vspace{0.8cm}
+    \begin{small}
+        \textbf{Légende :} PK = Clé Primaire, FK = Clé Étrangère, U = Unique
+    \end{small}
+\end{frame}
+
+% ============================================================================
+% SECTION X : AVANTAGES \& DÉFIS
+% ============================================================================
+
+\section{Avantages et Défis}
+
+\begin{frame}
+    \frametitle{X.1 Avantages du Projet}
+    
+    \begin{columns}[T]
+        \column{0.48\textwidth}
+        \begin{block}{Architecture}
+            \begin{itemize}
+                \item[\faCheckCircle] Séparation des responsabilités
+                \item[\faCheckCircle] Code modulaire et maintenable
+                \item[\faCheckCircle] Patterns de conception reconnus
+                \item[\faCheckCircle] Facilité d'extension
+            \end{itemize}
+        \end{block}
+        
+        \column{0.48\textwidth}
+        \begin{block}{Fonctionnalités}
+            \begin{itemize}
+                \item[\faCheckCircle] Système complet de point de vente
+                \item[\faCheckCircle] Alertes intelligentes de stock
+                \item[\faCheckCircle] Export PDF/CSV
+                \item[\faCheckCircle] Notifications SMS/Email
+            \end{itemize}
+        \end{block}
+    \end{columns}
+    
+    \vspace{1cm}
+    
+    \begin{block}{Sécurité \& Performance}
+        \begin{itemize}
+            \item[\faCheckCircle] Authentification robuste (BCrypt)
+            \item[\faCheckCircle] RBAC pour contrôle d'accès
+            \item[\faCheckCircle] Requêtes SQL optimisées
+            \item[\faCheckCircle] Logging structuré
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{X.2 Défis Rencontrés \& Solutions}
+    
+    \begin{block}{Défi 1 : Gestion Complexe des Transactions}
+        \textbf{Solution :} Utilisation de DAOs avec transactions JDBC appropriées
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    \begin{block}{Défi 2 : Synchronisation Stock}
+        \textbf{Solution :} Pattern Observer avec StockAlertListener
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    \begin{block}{Défi 3 : Génération PDF/CSV}
+        \textbf{Solution :} Bibliothèques iText et OpenCSV
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    \begin{block}{Défi 4 : Configuration Environnement}
+        \textbf{Solution :} Variables d'environnement + fichiers propriétés
+    \end{block}
+    
+    \vspace{0.5cm}
+    
+    \begin{block}{Défi 5 : Performance Requêtes}
+        \textbf{Solution :} Index sur clés étrangères, paginationquête optimisées
+    \end{block}
+\end{frame}
+
+% ============================================================================
+% SECTION XI : ÉVOLUTIONS FUTURES
+% ============================================================================
+
+\section{Évolutions Futures}
+
+\begin{frame}
+    \frametitle{XI. Évolutions Futures Possibles}
+    
+    \begin{block}{Court Terme (Prochaines versions)}
+        \begin{itemize}
+            \item[\faArrowRight] Rapports détaillés par période
+            \item[\faArrowRight] Dashboard analytique avancé
+            \item[\faArrowRight] Prévisions de stock (Machine Learning)
+            \item[\faArrowRight] Intégration paiements en ligne
+        \end{itemize}
+    \end{block}
+    
+    \vspace{0.8cm}
+    
+    \begin{block}{Moyen Terme}
+        \begin{itemize}
+            \item[\faArrowRight] Application mobile (Android/iOS)
+            \item[\faArrowRight] Synchronisation multi-magasins
+            \item[\faArrowRight] API REST pour intégrations tiers
+            \item[\faArrowRight] Audit trail complet
+        \end{itemize}
+    \end{block}
+    
+    \vspace{0.8cm}
+    
+    \begin{block}{Long Terme}
+        \begin{itemize}
+            \item[\faArrowRight] Migration vers microservices
+            \item[\faArrowRight] Blockchain pour traçabilité
+            \item[\faArrowRight] Système d'IA pour recommandations
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% ============================================================================
+% CONCLUSION
+% ============================================================================
+
+\section{Conclusion}
+
+\begin{frame}
+    \frametitle{Conclusion}
+    
+    \begin{block}{Résumé}
+        Notre application \textbf{Gestion Supermarché} démontre :
+        \begin{itemize}
+            \item[\faCheckCircle] Maîtrise de \textbf{Jakarta EE}
+            \item[\faCheckCircle] Compréhension des \textbf{patterns d'architecture}
+            \item[\faCheckCircle] Implémentation d'un système \textbf{sécurisé} et \textbf{scalable}
+            \item[\faCheckCircle] Intégration de \textbf{services externes} (SMS, Email, PDF)
+            \item[\faCheckCircle] Bonnes pratiques de \textbf{développement professionnel}
+        \end{itemize}
+    \end{block}
+    
+    \vspace{1cm}
+    
+    \begin{alertblock}{Points Clés}
+        Ce projet illustre comment construire une application web robuste
+        pour un domaine métier réel (Retail), avec une architecture maintenable
+        et des fonctionnalités complètes.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}[plain]
+    \begin{center}
+        \vspace{2cm}
+        {\Huge \textbf{\textcolor{DarkBlue}{Merci !}}}
+        
+        \vspace{1.5cm}
+        
+        {\Large Questions ?}
+        
+        \vspace{2cm}
+        
+        {\small
+            \textbf{Contact :} NANA TCHOFFO STEVE JUNIOR \\
+            \textbf{Université :} Yaoundé 1 - ICT4D \\
+            \textbf{Cours :} ICT318 - Jakarta EE
+        }
+        
+        \vspace{2cm}
+        
+        {\footnotesize \textcolor{gray}{
+            Groupe 07 - Année Académique 2024-2025 \\
+            Projet : Système de Gestion de Supermarché
+        }}
+    \end{center}
+\end{frame}
+
+\end{document}

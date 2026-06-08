@@ -8,7 +8,6 @@ import com.supermarche.entity.Utilisateur;
 import com.supermarche.entity.Vente;
 import com.supermarche.util.FlashUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,7 +18,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/ventes/nouvelle")
 public class NouvelleVenteServlet extends HttpServlet {
 
     private final ProduitDAO produitDAO = new ProduitDAO();
@@ -31,7 +29,7 @@ public class NouvelleVenteServlet extends HttpServlet {
         try {
             request.setAttribute("produits", produitDAO.findAll());
             FlashUtil.consume(request);
-            request.getRequestDispatcher("/views/vente/caisse.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/vente/caisse.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new ServletException("Impossible de charger la caisse.", e);
         }
@@ -56,6 +54,11 @@ public class NouvelleVenteServlet extends HttpServlet {
                 if (produitIds[i] == null || produitIds[i].isBlank()) {
                     continue;
                 }
+                if (quantites.length <= i || quantites[i] == null || quantites[i].isBlank()) {
+                    FlashUtil.error(request, "Quantite manquante pour un produit du panier.");
+                    response.sendRedirect(request.getContextPath() + "/ventes/nouvelle");
+                    return;
+                }
                 Produit produit = produitDAO.findById(Long.parseLong(produitIds[i]));
                 int quantite = Integer.parseInt(quantites[i]);
                 if (produit != null && quantite > 0) {
@@ -79,7 +82,7 @@ public class NouvelleVenteServlet extends HttpServlet {
             Vente vente = new Vente();
             vente.setCaissierId(utilisateur.getId());
             vente.setDateHeure(LocalDateTime.now());
-            vente.setModePaiement(Vente.ModePaiement.valueOf(request.getParameter("modePaiement")));
+            vente.setModePaiement(parseModePaiement(request.getParameter("modePaiement")));
             vente.setNumeroTicket(Vente.genererNumeroTicket());
             vente.setLignes(lignes);
             vente.calculerTotal();
@@ -92,5 +95,12 @@ public class NouvelleVenteServlet extends HttpServlet {
             FlashUtil.error(request, "Mode de paiement ou quantite invalide.");
             response.sendRedirect(request.getContextPath() + "/ventes/nouvelle");
         }
+    }
+
+    private Vente.ModePaiement parseModePaiement(String value) {
+        if (value == null || value.isBlank()) {
+            return Vente.ModePaiement.ESPECES;
+        }
+        return Vente.ModePaiement.valueOf(value.trim());
     }
 }

@@ -1,25 +1,20 @@
 package com.supermarche.util;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public final class DBUtil {
 
-    private static final Properties PROPERTIES = new Properties();
-
     static {
-        try (InputStream input = DBUtil.class.getClassLoader().getResourceAsStream("db.properties")) {
-            if (input == null) {
-                throw new IllegalStateException("Le fichier db.properties est introuvable.");
+        try {
+            String driver = AppConfig.getDb("db.driver", "DB_DRIVER");
+            if (driver == null || driver.isBlank()) {
+                throw new IllegalStateException("Driver JDBC manquant (db.driver/DB_DRIVER)");
             }
-            PROPERTIES.load(input);
-            Class.forName(resolve("db.driver", "DB_DRIVER"));
-        } catch (IOException | ClassNotFoundException e) {
-            throw new ExceptionInInitializerError(e);
+            Class.forName(driver);
+        } catch (ClassNotFoundException e) {
+            throw new ExceptionInInitializerError("Impossible de charger le driver JDBC : " + e.getMessage());
         }
     }
 
@@ -27,18 +22,15 @@ public final class DBUtil {
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(
-            resolve("db.url", "DB_URL"),
-            resolve("db.username", "DB_USERNAME"),
-            resolve("db.password", "DB_PASSWORD")
-        );
-    }
+        String url = AppConfig.getDb("db.url", "DB_URL");
+        String username = AppConfig.getDb("db.username", "DB_USERNAME");
+        String password = AppConfig.getDb("db.password", "DB_PASSWORD");
 
-    private static String resolve(String key, String envKey) {
-        String envValue = System.getenv(envKey);
-        if (envValue != null && !envValue.isBlank()) {
-            return envValue.trim();
-        }
-        return PROPERTIES.getProperty(key);
+        // Validation explicite des paramètres obligatoires
+        AppConfig.required(url, "URL de la base de données (db.url/DB_URL)");
+        AppConfig.required(username, "Nom d'utilisateur (db.username/DB_USERNAME)");
+        // Le mot de passe peut être vide, pas de required
+
+        return DriverManager.getConnection(url, username, password);
     }
 }

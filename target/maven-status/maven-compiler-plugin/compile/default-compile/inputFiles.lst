@@ -1,42 +1,42 @@
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\dao\FournisseurDAO.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\dao\LigneVenteDAO.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\dao\ProduitDAO.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\dao\UtilisateurDAO.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\dao\VenteDAO.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\entity\Fournisseur.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\entity\LigneVente.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\entity\Produit.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\entity\Utilisateur.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\entity\Vente.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\filter\AuthFilter.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\listener\StockAlertListener.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\auth\LoginServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\auth\LogoutServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\dashboard\DashboardServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\fournisseur\AjouterFournisseurServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\fournisseur\BonCommandeFournisseurServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\fournisseur\FormFournisseurServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\fournisseur\ListeFournisseurServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\fournisseur\ModifierFournisseurServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\fournisseur\SupprimerFournisseurServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\HomeServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\produit\AjouterProduitServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\produit\FormProduitServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\produit\ListeProduitServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\produit\ModifierProduitServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\produit\SupprimerProduitServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\stats\StatistiquesServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\stock\AlertesStockServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\vente\NouvelleVenteServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\servlet\vente\TicketServlet.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\AppConfig.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\BCryptUtil.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\CSVUtil.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\DBUtil.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\EmailUtil.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\FlashUtil.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\FormUtil.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\MoneyUtil.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\PaginationUtil.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\PDFUtil.java
-C:\Users\COMPUTER STORES\Desktop\ICT318\supermarche\src\main\java\com\supermarche\util\SMSUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/dao/FournisseurDAO.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/dao/LigneVenteDAO.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/dao/ProduitDAO.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/dao/UtilisateurDAO.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/dao/VenteDAO.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/entity/Fournisseur.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/entity/LigneVente.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/entity/Produit.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/entity/Utilisateur.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/entity/Vente.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/filter/AuthFilter.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/listener/StockAlertListener.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/HomeServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/auth/LoginServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/auth/LogoutServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/dashboard/DashboardServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/fournisseur/AjouterFournisseurServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/fournisseur/BonCommandeFournisseurServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/fournisseur/FormFournisseurServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/fournisseur/ListeFournisseurServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/fournisseur/ModifierFournisseurServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/fournisseur/SupprimerFournisseurServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/produit/AjouterProduitServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/produit/FormProduitServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/produit/ListeProduitServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/produit/ModifierProduitServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/produit/SupprimerProduitServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/stats/StatistiquesServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/stock/AlertesStockServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/vente/NouvelleVenteServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/servlet/vente/TicketServlet.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/AppConfig.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/BCryptUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/CSVUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/DBUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/EmailUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/FlashUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/FormUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/MoneyUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/PDFUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/PaginationUtil.java
+/home/stive-junior/Gestion_Supmarche/src/main/java/com/supermarche/util/SMSUtil.java

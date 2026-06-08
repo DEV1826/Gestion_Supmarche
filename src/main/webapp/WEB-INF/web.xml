@@ -6,6 +6,232 @@
 
     <display-name>Supermarche</display-name>
 
+    <!-- ============================================================================
+         SERVLETS
+         ============================================================================ -->
+
+    <!-- Accueil -->
+    <servlet>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.HomeServlet</servlet-class>
+    </servlet>
+
+    <!-- Authentification -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.auth.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.auth.LogoutServlet</servlet-class>
+    </servlet>
+
+    <!-- Dashboard -->
+    <servlet>
+        <servlet-name>DashboardServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.dashboard.DashboardServlet</servlet-class>
+    </servlet>
+
+    <!-- Gestion Produits -->
+    <servlet>
+        <servlet-name>ListeProduitServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.produit.ListeProduitServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>FormProduitServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.produit.FormProduitServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AjouterProduitServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.produit.AjouterProduitServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ModifierProduitServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.produit.ModifierProduitServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SupprimerProduitServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.produit.SupprimerProduitServlet</servlet-class>
+    </servlet>
+
+    <!-- Gestion Fournisseurs -->
+    <servlet>
+        <servlet-name>ListeFournisseurServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.fournisseur.ListeFournisseurServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>FormFournisseurServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.fournisseur.FormFournisseurServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>AjouterFournisseurServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.fournisseur.AjouterFournisseurServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ModifierFournisseurServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.fournisseur.ModifierFournisseurServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SupprimerFournisseurServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.fournisseur.SupprimerFournisseurServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>BonCommandeFournisseurServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.fournisseur.BonCommandeFournisseurServlet</servlet-class>
+    </servlet>
+
+    <!-- Gestion Ventes -->
+    <servlet>
+        <servlet-name>NouvelleVenteServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.vente.NouvelleVenteServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>TicketServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.vente.TicketServlet</servlet-class>
+    </servlet>
+
+    <!-- Gestion Stock -->
+    <servlet>
+        <servlet-name>AlertesStockServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.stock.AlertesStockServlet</servlet-class>
+    </servlet>
+
+    <!-- Statistiques -->
+    <servlet>
+        <servlet-name>StatistiquesServlet</servlet-name>
+        <servlet-class>com.supermarche.servlet.stats.StatistiquesServlet</servlet-class>
+    </servlet>
+
+    <!-- ============================================================================
+         SERVLET MAPPINGS
+         ============================================================================ -->
+
+    <servlet-mapping>
+        <servlet-name>HomeServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DashboardServlet</servlet-name>
+        <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ListeProduitServlet</servlet-name>
+        <url-pattern>/produits</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>FormProduitServlet</servlet-name>
+        <url-pattern>/produits/modifier</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AjouterProduitServlet</servlet-name>
+        <url-pattern>/produits/ajouter</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ModifierProduitServlet</servlet-name>
+        <url-pattern>/produits/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SupprimerProduitServlet</servlet-name>
+        <url-pattern>/produits/supprimer</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ListeFournisseurServlet</servlet-name>
+        <url-pattern>/fournisseurs</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>FormFournisseurServlet</servlet-name>
+        <url-pattern>/fournisseurs/modifier</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AjouterFournisseurServlet</servlet-name>
+        <url-pattern>/fournisseurs/ajouter</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ModifierFournisseurServlet</servlet-name>
+        <url-pattern>/fournisseurs/update</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SupprimerFournisseurServlet</servlet-name>
+        <url-pattern>/fournisseurs/supprimer</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>BonCommandeFournisseurServlet</servlet-name>
+        <url-pattern>/fournisseurs/commande</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>NouvelleVenteServlet</servlet-name>
+        <url-pattern>/ventes/nouvelle</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TicketServlet</servlet-name>
+        <url-pattern>/ventes/ticket</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AlertesStockServlet</servlet-name>
+        <url-pattern>/stock/alertes</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>StatistiquesServlet</servlet-name>
+        <url-pattern>/stats</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============================================================================
+         FILTRES
+         ============================================================================ -->
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.supermarche.filter.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+    <!-- ============================================================================
+         CONFIGURATION GLOBALE
+         ============================================================================ -->
+
     <welcome-file-list>
         <welcome-file>login</welcome-file>
     </welcome-file-list>
@@ -16,7 +242,16 @@
     </error-page>
 
     <error-page>
-        <exception-type>java.lang.Exception</exception-type>
-        <location>/views/error/500.jsp</location>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/error/500.jsp</location>
     </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/WEB-INF/views/error/500.jsp</location>
+    </error-page>
+
+    <!-- Encodage UTF-8 pour les requêtes -->
+    <request-character-encoding>UTF-8</request-character-encoding>
+
 </web-app>

@@ -9,7 +9,6 @@ import com.supermarche.util.MoneyUtil;
 import com.supermarche.util.PDFUtil;
 import com.supermarche.util.SMSUtil;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/fournisseurs/commande")
 public class BonCommandeFournisseurServlet extends HttpServlet {
 
     private final FournisseurDAO fournisseurDAO = new FournisseurDAO();

@@ -3,7 +3,6 @@ package com.supermarche.servlet.stats;
 import com.supermarche.dao.ProduitDAO;
 import com.supermarche.dao.VenteDAO;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/stats")
 public class StatistiquesServlet extends HttpServlet {
 
     private final VenteDAO venteDAO = new VenteDAO();
@@ -26,7 +24,7 @@ public class StatistiquesServlet extends HttpServlet {
             request.setAttribute("ventesHebdo", venteDAO.ventesHebdo());
             request.setAttribute("kpis", venteDAO.kpis());
             request.setAttribute("alertesStock", produitDAO.countAlertesStock());
-            request.getRequestDispatcher("/views/stats/dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/stats/dashboard.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new ServletException("Impossible de charger les statistiques.", e);
         }
