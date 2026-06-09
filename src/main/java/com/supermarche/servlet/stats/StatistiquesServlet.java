@@ -1,5 +1,6 @@
 package com.supermarche.servlet.stats;
 
+import com.supermarche.dao.FournisseurDAO;
 import com.supermarche.dao.ProduitDAO;
 import com.supermarche.dao.VenteDAO;
 import jakarta.servlet.ServletException;
@@ -14,6 +15,7 @@ public class StatistiquesServlet extends HttpServlet {
 
     private final VenteDAO venteDAO = new VenteDAO();
     private final ProduitDAO produitDAO = new ProduitDAO();
+    private final FournisseurDAO fournisseurDAO = new FournisseurDAO();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -24,6 +26,8 @@ public class StatistiquesServlet extends HttpServlet {
             request.setAttribute("ventesHebdo", venteDAO.ventesHebdo());
             request.setAttribute("kpis", venteDAO.kpis());
             request.setAttribute("alertesStock", produitDAO.countAlertesStock());
+            request.setAttribute("totalProduits", produitDAO.countAll());
+            request.setAttribute("totalFournisseurs", fournisseurDAO.countAll());
             request.getRequestDispatcher("/WEB-INF/views/stats/dashboard.jsp").forward(request, response);
         } catch (SQLException e) {
             throw new ServletException("Impossible de charger les statistiques.", e);
