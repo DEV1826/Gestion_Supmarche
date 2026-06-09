@@ -383,11 +383,6 @@ public final class PDFUtil {
         .setFontColor(SLATE)
         .setTextAlignment(TextAlignment.CENTER)
         .setMarginTop(8));
-    footer.add(new Paragraph("Palette: MarketPro UI - bleu pine, blanc shell, accent gold.")
-        .setFontSize(7)
-        .setFontColor(SLATE)
-        .setTextAlignment(TextAlignment.CENTER)
-        .setMarginTop(1));
     document.add(footer);
 }
 

@@ -164,7 +164,7 @@ public final class EmailUtil {
             + "</td></tr></table>"
             + "</td></tr>"
             + "<tr><td style=\"padding:18px 28px;background:#f4f8ff;border-top:1px solid #d7e4ff;font-size:12px;color:#5d697e;text-align:center;\">"
-            + "MarketPro UI - bleu pine, blanc shell, accent gold"
+            + "SuperMarche - gestion de supermarche - &copy; " + LocalDateTime.now().getYear() + " Tous droits reserves."
             + "</td></tr>"
             + "</table></td></tr></table></body></html>";
     }
